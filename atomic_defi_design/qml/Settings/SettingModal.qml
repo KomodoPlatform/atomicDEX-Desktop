@@ -62,7 +62,6 @@ Qaterial.Dialog {
         Qaterial.AppBarButton {
             anchors.right: parent.right
             anchors.rightMargin: 10
-            foregroundColor: theme.foregroundColor
             icon.source: Qaterial.Icons.close
             anchors.verticalCenter: parent.verticalCenter
             onClicked: setting_modal.close()
@@ -534,6 +533,7 @@ Qaterial.Dialog {
         height: 50
         anchors.bottom: parent.bottom
         DexSelectableButton {
+            enabled: false
             selected: true
             anchors.right: logout_button.left
             anchors.rightMargin: 10

@@ -339,9 +339,10 @@ namespace atomic_dex
         system_manager_.create_system<global_price_service>(system_manager_, settings_page_system.get_cfg());
         system_manager_.create_system<orderbook_scanner_service>(system_manager_);
         system_manager_.create_system<band_oracle_price_service>();
-        // system_manager_.create_system<coinpaprika_provider>(system_manager_);
+        // system_manager_.create_sy
+        // stem<coinpaprika_provider>(system_manager_);
         system_manager_.create_system<coingecko_provider>(system_manager_);
-        system_manager_.create_system<self_update_service>();
+        system_manager_.create_system<self_update_service>().disable();
         system_manager_.create_system<coingecko_wallet_charts_service>(system_manager_);
         system_manager_.create_system<exporter_service>(system_manager_);
         system_manager_.create_system<trading_page>(

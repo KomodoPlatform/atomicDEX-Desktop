@@ -210,7 +210,7 @@ BasicModal {
                     Layout.alignment: Qt.AlignHCenter
 
                     visible: config_section.is_dpow_configurable
-                    checked: true
+                    checked: false
                     text: qsTr("Enable Komodo dPoW security")
                 }
 
