@@ -1,22 +1,22 @@
 # Default project values
-set(DEX_PROJECT_NAME "atomicdex-desktop")
-set(DEX_DISPLAY_NAME "AtomicDEX Desktop")
-set(DEX_MAINTENANCE_TOOL_NAME "AtomicDEX Maintenance Tool")
-set(DEX_COMPANY "KomodoPlatform")
-set(DEX_WEBSITE "https://atomicdex.io/")
+set(DEX_PROJECT_NAME "GleecDEX")
+set(DEX_DISPLAY_NAME "GleecDEX")
+set(DEX_MAINTENANCE_TOOL_NAME "GleecDEX Maintenance Tool")
+set(DEX_COMPANY "Gleec")
+set(DEX_WEBSITE "https://gleec.com/")
 set(DEX_SUPPORT_PAGE "https://support.komodoplatform.com/support/home")
-set(DEX_DISCORD "https://komodoplatform.com/discord")
-set(DEX_TWITTER "https://twitter.com/AtomicDEX")
-set(DEX_PRIMARY_COIN "KMD")                                                         ## Main coin of the DEX, will be enabled by default and will be the default left ticker for trading
-set(DEX_SECOND_PRIMARY_COIN "LTC")                                                  ## Second main coin of the DEX, will be enabled by default and will be the default right ticker for trading
-option(DISABLE_GEOBLOCKING "Enable to disable geoblocking (for dev purpose)" OFF)
+set(DEX_DISCORD "")
+set(DEX_TWITTER "https://twitter.com/GleecOfficial")
+set(DEX_PRIMARY_COIN "BTC") ## Main coin of the DEX, will enable it by default and will be the default left ticker for trading
+set(DEX_SECOND_PRIMARY_COIN "GLEEC")  ## Second main coin of the DEX, will enable it by default and will be the default right ticker for trading
+option(DISABLE_GEOBLOCKING "Enable to disable geoblocking (for dev purpose)" ON)
 set(DEX_REPOSITORY_OWNER ${DEX_COMPANY})
 set(DEX_REPOSITORY_NAME "atomicDEX-Desktop")
 set(DEX_CHECKSUM_API_URL "https://komodo.live/static/checksum.json")
 if (APPLE)
-    set(DEX_APPDATA_FOLDER "AtomicDex Desktop")
+    set(DEX_APPDATA_FOLDER "GleecDEX")
 else ()
-    set(DEX_APPDATA_FOLDER "atomic_qt")
+    set(DEX_APPDATA_FOLDER "GleecDEX")
 endif ()
 message(STATUS "APPDATA folder is ${DEX_APPDATA_FOLDER}")
 
