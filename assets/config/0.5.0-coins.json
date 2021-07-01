@@ -576,7 +576,7 @@
     "currently_enabled": false
   },
   "BCH": {
-    "active": false,
+    "active": true,
     "coin": "BCH",
     "coingecko_id": "bitcoin-cash",
     "coinpaprika_id": "bch-bitcoin-cash",
@@ -1981,7 +1981,7 @@
       "currently_enabled": false
   },
   "ETH": {
-    "active": false,
+    "active": true,
     "coin": "ETH",
     "coingecko_id": "ethereum",
     "coinpaprika_id": "eth-ethereum",
@@ -2092,7 +2092,7 @@
         "https://bscscan.com/"
       ],
       "type": "BEP-20",
-      "active": false,
+      "active": true,
       "currently_enabled": false
   },
   "USDC-ERC20": {
@@ -2109,7 +2109,7 @@
         "https://etherscan.io/"
       ],
       "type": "ERC-20",
-      "active": false,
+      "active": true,
       "currently_enabled": false
   },
   "USDT-BEP20": {
@@ -2496,7 +2496,7 @@
         "https://bscscan.com/"
       ],
       "type": "BEP-20",
-      "active": false,
+      "active": true,
       "currently_enabled": false
   },
   "SOULJA": {
@@ -3828,7 +3828,7 @@
       "https://explorer.sfusd.kmd.sh/"
     ],
     "type": "UTXO",
-    "active": false,
+    "active": true,
     "currently_enabled": false
   },
  "AGI": {
