@@ -18,8 +18,14 @@ import "../Constants"
 Qaterial.Dialog {
 
     function disconnect() {
-        API.app.disconnect()
-        onDisconnect()
+        
+        Qaterial.DialogManager.showDialog({title: qsTr("Confirm Logout"),text: qsTr("Are you sure you want to log out?"),iconSource: Qaterial.Icons.logout,standardButtons: Dialog.Yes | Dialog.Cancel, onAccepted: function(){
+            Qaterial.DialogManager.close()
+            app.currentWalletName = ""
+            API.app.disconnect()
+            onDisconnect()
+        }})
+        
     }
 
     readonly property string mm2_version: API.app.settings_pg.get_mm2_version()
@@ -214,7 +220,7 @@ Qaterial.Dialog {
                                     implicitHeight: 37
                                     onClicked: {
                                         restart_modal.open()
-                                        restart_modal.item.task_before_restart = () => { API.app.settings_pg.reset_coin_cfg() }
+                                        restart_modal.item.onTimerEnded = () => { API.app.settings_pg.reset_coin_cfg() }
                                     }
                                 }
                             }
@@ -283,11 +289,11 @@ Qaterial.Dialog {
                                     id: dexFont
                                     editable: true
                                     Layout.alignment: Qt.AlignVCenter
-                                    displayText: _font.fontFamily
-                                    model: Qt.fontFamilies()
+                                    model: ["Ubuntu", "Montserrat", "Roboto"]
                                     Component.onCompleted: {
                                         let current = _font.fontFamily
-                                        currentIndex = Qt.fontFamilies().indexOf(current)
+                                        currentIndex = dexFont.model.indexOf(current)
+                                        //currentDisplay = currentText
                                     }
                                 }
                             }

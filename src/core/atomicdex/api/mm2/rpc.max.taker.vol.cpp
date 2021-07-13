@@ -44,7 +44,8 @@ namespace mm2::api
         j.at("numer").get_to(cfg.numer);
         t_rational rat(boost::multiprecision::cpp_int(cfg.numer), boost::multiprecision::cpp_int(cfg.denom));
         t_float_50 res = rat.convert_to<t_float_50>();
-        cfg.decimal    = res.str(8);
+        cfg.decimal    = atomic_dex::utils::extract_large_float(res.str(50));
+        //SPDLOG_INFO("decimal: {}", cfg.decimal);
     }
 
     void
@@ -54,7 +55,7 @@ namespace mm2::api
         if (answer.error.has_value()) ///< we need a default fallback in this case fixed on upstream already, need to update
         {
             SPDLOG_WARN("Max taker volume need a default value, fallback with 0 as value, this is probably because you have an empty balance or not enough "
-                        "funds (< 0.00777).");
+                        "funds (< 0.00777)., error: {}", answer.error.value());
             answer.result = max_taker_vol_answer_success{.denom = "1", .numer = "0", .decimal = "0"};
         }
     }

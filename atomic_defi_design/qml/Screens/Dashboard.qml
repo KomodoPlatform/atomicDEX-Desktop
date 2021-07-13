@@ -39,7 +39,6 @@ Item {
 
     property var current_ticker
 
-    property alias notifications_modal: notifications_modal
     Layout.fillWidth: true
 
     function openLogsFolder() {
@@ -53,6 +52,9 @@ Item {
     readonly property alias loader: loader
     readonly property alias current_component: loader.item
     property int current_page: idx_dashboard_portfolio
+    onCurrent_pageChanged: {
+        app.deepPage = current_page*10
+    }
 
 
     readonly property bool is_dex_banned: !API.app.ip_checker.ip_authorized
@@ -82,13 +84,15 @@ Item {
     }
 
     // Force restart modal: opened when the user has more coins enabled than specified in its configuration
-    ForceRestartModal {
-        reason: qsTr("The current number of enabled coins does not match your configuration specification. Your assets configuration will be reset.")
-        Component.onCompleted: {
+    ForceRestartModal
+    {
+        reasonMsg: qsTr("The current number of enabled coins does not match your configuration specification. Your assets configuration will be reset.")
+        Component.onCompleted:
+        {
             if (API.app.portfolio_pg.portfolio_mdl.length > atomic_settings2.value("MaximumNbCoinsEnabled"))
             {
                 open()
-                task_before_restart = () => { API.app.settings_pg.reset_coin_cfg() }
+                onTimerEnded = () => { API.app.settings_pg.reset_coin_cfg() }
             }
         }
     }
@@ -97,9 +101,9 @@ Item {
     AnimatedRectangle {
         color: theme.backgroundColorDeep
         width: parent.width - sidebar.width
-        height: window.isOsx? parent.height : parent.height-40
-        y: !window.isOsx? 40 : 0
+        height: parent.height
         x: sidebar.width
+        border.color: 'transparent'
 
         // Modals
         ModalLoader {
@@ -220,41 +224,7 @@ Item {
     // Sidebar, left side
     Sidebar {
         id: sidebar
-
-    }
-
-    // Unread notifications count
-    AnimatedRectangle {
-        radius: 1337
-        width: count_text.height * 1.5
-        height: width
-        z: 1
-
-        x: sidebar.app_logo.x + sidebar.app_logo.width - 20
-        y: sidebar.app_logo.y
-        color: Qt.lighter(notifications_list.length > 0 ? Style.colorRed : theme.backgroundColor, notifications_modal_button.containsMouse ? Style.hoverLightMultiplier : 1)
-
-        DefaultText {
-            id: count_text
-            anchors.centerIn: parent
-            text_value: notifications_list.length
-            font.pixelSize: Style.textSizeSmall1
-            font.weight: Font.Medium
-            color: notifications_list.length > 0 ? theme.foregroundColor : Qt.darker(theme.foregroundColor)
-        }
-    }
-
-    // Notifications panel button
-    DefaultMouseArea {
-        id: notifications_modal_button
-        x: sidebar.app_logo.x
-        y: sidebar.app_logo.y
-        width: sidebar.app_logo.width
-        height: sidebar.app_logo.height
-
-        hoverEnabled: true
-
-        onClicked: notifications_modal.open()
+        y: -30
     }
 
     DropShadow {
@@ -268,14 +238,6 @@ Item {
         spread: 0
         color: theme.colorSidebarDropShadow
         smooth: true
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: '#000'
-        visible: notifications_modal.visible
-        anchors.leftMargin: sidebar.width
-        opacity: .6
     }
 
     ModalLoader {
@@ -296,10 +258,6 @@ Item {
     ModalLoader {
         id: restart_modal
         sourceComponent: RestartModal {}
-    }
-
-    NotificationsModal {
-        id: notifications_modal
     }
 
     function getStatusColor(status) {
